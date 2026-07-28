@@ -1,146 +1,8 @@
-<!DOCTYPE html>
+{% extends "base.html" %}
 
-<html class="light" lang="en"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>PetMama | Your Pet's Second Home</title>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&amp;family=Source+Sans+3:wght@300;400;600;700&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<script id="tailwind-config">
-      tailwind.config = {
-        darkMode: "class",
-        theme: {
-          extend: {
-            "colors": {
-                    "inverse-on-surface": "#f4f0eb",
-                    "outline-variant": "#dcc1b6",
-                    "primary-fixed": "#ffdbcd",
-                    "on-tertiary-container": "#4a2a0b",
-                    "secondary-fixed-dim": "#f0c03f",
-                    "surface-tint": "#9d4316",
-                    "secondary-fixed": "#ffdf97",
-                    "tertiary-container": "#bf9069",
-                    "surface-variant": "#e6e2dd",
-                    "inverse-primary": "#ffb597",
-                    "surface": "#fdf9f4",
-                    "on-secondary-fixed-variant": "#5a4400",
-                    "primary-fixed-dim": "#ffb597",
-                    "on-error": "#ffffff",
-                    "surface-container-lowest": "#ffffff",
-                    "error": "#ba1a1a",
-                    "surface-container": "#f1ede8",
-                    "background": "#fdf9f4",
-                    "surface-container-highest": "#e6e2dd",
-                    "secondary": "#775a00",
-                    "on-tertiary-fixed-variant": "#623f1e",
-                    "on-surface-variant": "#56423b",
-                    "on-background": "#1c1c19",
-                    "on-primary": "#ffffff",
-                    "surface-dim": "#ddd9d5",
-                    "on-secondary-container": "#715600",
-                    "on-primary-container": "#5a1e00",
-                    "primary-container": "#e87c4b",
-                    "on-primary-fixed": "#360f00",
-                    "surface-bright": "#fdf9f4",
-                    "on-secondary": "#ffffff",
-                    "inverse-surface": "#31302d",
-                    "tertiary": "#7d5633",
-                    "tertiary-fixed": "#ffdcc2",
-                    "error-container": "#ffdad6",
-                    "on-tertiary-fixed": "#2e1500",
-                    "primary": "#9d4316",
-                    "secondary-container": "#fccb49",
-                    "on-tertiary": "#ffffff",
-                    "surface-container-high": "#ebe8e3",
-                    "on-surface": "#1c1c19",
-                    "tertiary-fixed-dim": "#f0bc92",
-                    "on-secondary-fixed": "#251a00",
-                    "on-error-container": "#93000a",
-                    "surface-container-low": "#f7f3ee",
-                    "outline": "#897269",
-                    "on-primary-fixed-variant": "#7d2d00"
-            },
-            "borderRadius": {
-                    "DEFAULT": "0.25rem",
-                    "lg": "0.5rem",
-                    "xl": "0.75rem",
-                    "full": "9999px"
-            },
-            "spacing": {
-                    "margin-mobile": "16px",
-                    "gutter": "24px",
-                    "base": "8px",
-                    "margin-desktop": "40px",
-                    "container-max": "1200px"
-            },
-            "fontFamily": {
-                    "body-lg": ["\"Source Sans 3\""],
-                    "display-lg": ["Quicksand"],
-                    "headline-md-mobile": ["Quicksand"],
-                    "headline-md": ["Quicksand"],
-                    "body-md": ["\"Source Sans 3\""],
-                    "label-md": ["Quicksand"],
-                    "display-lg-mobile": ["Quicksand"],
-                    "title-lg": ["Quicksand"]
-            },
-            "fontSize": {
-                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
-                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
-                    "headline-md-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
-                    "headline-md": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
-                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
-                    "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "700"}],
-                    "display-lg-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
-                    "title-lg": ["20px", {"lineHeight": "28px", "fontWeight": "600"}]
-            }
-          },
-        },
-      }
-    </script>
-<style>
-        body {
-            background-color: #fdf9f4; /* Oatmeal background */
-            color: #1c1c19;
-            overflow-x: hidden;
-        }
-        .organic-blob {
-            position: absolute;
-            z-index: -1;
-            filter: blur(40px);
-            opacity: 0.15;
-            border-radius: 50%;
-        }
-        .material-symbols-outlined {
-            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-            vertical-align: middle;
-        }
-        .soft-shadow {
-            box-shadow: 0 10px 30px rgba(232, 124, 75, 0.08);
-        }
-    </style>
-</head>
-<body class="font-body-md text-on-background">
-<!-- Navigation -->
-<nav class="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-md dark:bg-surface-dim/80 shadow-[0_10px_30px_rgba(232,124,75,0.08)]">
-<div class="flex justify-between items-center px-margin-desktop py-4 max-w-container-max mx-auto">
-<div class="font-display-lg text-display-lg text-primary dark:text-primary-fixed-dim">PetMama</div>
-<!-- Desktop Links -->
-<div class="hidden md:flex items-center space-x-8">
-<a class="font-label-md text-label-md text-primary dark:text-primary-fixed-dim border-b-2 border-primary font-bold pb-1 transition-all duration-300" href="#">Home</a>
-<a class="font-label-md text-label-md text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed-dim hover:-translate-y-1 transition-all duration-300" href="#">About Us</a>
-<a class="font-label-md text-label-md text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed-dim hover:-translate-y-1 transition-all duration-300" href="#">Blog</a>
-<a class="font-label-md text-label-md text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed-dim hover:-translate-y-1 transition-all duration-300" href="#">Admission</a>
-<a class="font-label-md text-label-md text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed-dim hover:-translate-y-1 transition-all duration-300" href="#">Book Sit</a>
-</div>
-<button class="bg-primary text-on-primary px-8 py-3 rounded-full font-label-md text-label-md transition-transform duration-200 active:scale-95 hover:shadow-lg">
-                Book a Stay
-            </button>
-</div>
-</nav>
-<!-- Main Content -->
-<main class="pt-24">
+{% block title %}PetMama | Your Pet's Second Home{% endblock %}
+
+{% block content %}
 <!-- Hero Section -->
 <section class="relative px-margin-mobile md:px-margin-desktop py-16 md:py-32 overflow-hidden">
 <div class="organic-blob bg-primary-container w-96 h-96 -top-20 -left-20"></div>
@@ -166,7 +28,7 @@
 </div>
 <div class="order-1 md:order-2 relative">
 <div class="rounded-3xl overflow-hidden soft-shadow relative z-10 transform md:rotate-2">
-<img class="w-full h-auto aspect-[4/5] object-cover" data-alt="A warm, professional pet hostel interior featuring a happy Golden Retriever sitting on a soft cream-colored rug in a sunlit living-room-style environment. The space is decorated with minimalist wooden furniture, soft oatmeal-colored walls, and high-quality pet accessories. The lighting is golden-hour soft, creating a nurturing and safe atmosphere with a premium, warm aesthetic and no cool tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA212KS2p_AY2TZ1immo-b0FjNAXT2Fv-RFeYIaB8KUgVdNtBamViXahmg53SGiI-a7YVdqQt4r3e5t4jsHSC4HlKAxRC6ZzG3byqo4x2mVcfN4pKCXVDf-9eFJd7py0VB30ALnnPj_0QVRKSDrYNDIixkvRpatACOtKppJl0RVGOKu2rZAfdars3OWU71qJ1O9-3X6ZlEsFqpUIJ-o9jQmXdU9Cz2KxGXC88NWpWCWdRd4ECmmhFsEnQ"/>
+<img class="w-full h-auto aspect-[4/5] object-cover" alt="A warm, professional pet hostel interior with a Golden Retriever on a cream rug" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA212KS2p_AY2TZ1immo-b0FjNAXT2Fv-RFeYIaB8KUgVdNtBamViXahmg53SGiI-a7YVdqQt4r3e5t4jsHSC4HlKAxRC6ZzG3byqo4x2mVcfN4pKCXVDf-9eFJd7py0VB30ALnnPj_0QVRKSDrYNDIixkvRpatACOtKppJl0RVGOKu2rZAfdars3OWU71qJ1O9-3X6ZlEsFqpUIJ-o9jQmXdU9Cz2KxGXC88NWpWCWdRd4ECmmhFsEnQ"/>
 </div>
 <div class="absolute -bottom-6 -left-6 bg-surface-container-lowest p-6 rounded-2xl soft-shadow z-20 flex items-center gap-4 animate-bounce">
 <div class="w-12 h-12 bg-secondary-container rounded-full flex items-center justify-center text-on-secondary-container">
@@ -180,6 +42,7 @@
 </div>
 </div>
 </section>
+
 <!-- Bento Features -->
 <section class="py-20 md:py-32 px-margin-mobile md:px-margin-desktop bg-surface-container-low">
 <div class="max-w-container-max mx-auto">
@@ -209,7 +72,7 @@
 </ul>
 </div>
 <div class="w-full md:w-1/2 rounded-xl overflow-hidden h-48 md:h-64">
-<img class="w-full h-full object-cover" data-alt="A macro shot of a gentle human hand resting on a dog's paw, symbolizing professional care and trust. The lighting is warm and diffused, emphasizing soft textures and a sense of safety. The background shows a modern, clean, and warmly lit pet care facility with neutral oatmeal and terracotta tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAgMmQ1Ss9EpgqCufYEkDhYq36o8LPeo5joyiOBKmu32DHv6BpyvU-ARduhvGQjiCXLNC8BAKQ17llLsagK2yz9Wwz--TdPdkJFIPqmFrhJ6_pbHREHCrX_YcV89jGKv-iQzVZMNgTZFORvgqZ-wx8cyhYTdU8Oyss8YOBbpQn3XSk-1_D7kQxx6I69c3MnjL8r0o5RusnB1dAvEOqPt_-DQRuUAzFT-Qp73KULwFLDRTNIBgD4IZkV9w"/>
+<img class="w-full h-full object-cover" alt="A hand resting gently on a dog's paw" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAgMmQ1Ss9EpgqCufYEkDhYq36o8LPeo5joyiOBKmu32DHv6BpyvU-ARduhvGQjiCXLNC8BAKQ17llLsagK2yz9Wwz--TdPdkJFIPqmFrhJ6_pbHREHCrX_YcV89jGKv-iQzVZMNgTZFORvgqZ-wx8cyhYTdU8Oyss8YOBbpQn3XSk-1_D7kQxx6I69c3MnjL8r0o5RusnB1dAvEOqPt_-DQRuUAzFT-Qp73KULwFLDRTNIBgD4IZkV9w"/>
 </div>
 </div>
 </div>
@@ -221,7 +84,7 @@
 <h3 class="font-title-lg text-title-lg mb-3">Organic Comfort</h3>
 <p class="text-on-secondary-container">Luxurious orthopedic bedding and temperature-controlled rooms that mimic a cozy home environment.</p>
 <div class="mt-8 rounded-lg overflow-hidden h-32">
-<img class="w-full h-full object-cover" data-alt="A close-up of a cozy pet corner with a high-quality orthopedic dog bed in soft beige, surrounded by warm wooden textures and a small organic-shaped plush toy. The mood is tranquil, serene, and incredibly welcoming, reflecting a premium pet hostel's comfort." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCUKAzScN_RekqGNQMAHTLJ8qTbxE5HBBp1psbpTeLiIBZnQM4YypFPVNrwZPTXdN3z_UfJBSON2-tyS5VAq0h-CT8TRbfZoOwDfVpnQFqLmCq0NTsIB4R8dflSr0ofFRYxycAleHXMaxUlYXe9GXHWoP_Qd5lPxULbH0x07-KLsqRWJyQk4Md5Ajh-eZxuEtq6zZkp2Vrkz5jb-xZ7gAGfN6txs2QMEhuQATWANi8ezO4tkcpGQk1aWg"/>
+<img class="w-full h-full object-cover" alt="A cozy orthopedic pet bed corner" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCUKAzScN_RekqGNQMAHTLJ8qTbxE5HBBp1psbpTeLiIBZnQM4YypFPVNrwZPTXdN3z_UfJBSON2-tyS5VAq0h-CT8TRbfZoOwDfVpnQFqLmCq0NTsIB4R8dflSr0ofFRYxycAleHXMaxUlYXe9GXHWoP_Qd5lPxULbH0x07-KLsqRWJyQk4Md5Ajh-eZxuEtq6zZkp2Vrkz5jb-xZ7gAGfN6txs2QMEhuQATWANi8ezO4tkcpGQk1aWg"/>
 </div>
 </div>
 <!-- Community Card -->
@@ -243,13 +106,14 @@
 <p class="text-on-surface-variant">We don't just board; we care for the soul. Personalized nutrition plans and daily mental enrichment activities are part of every stay.</p>
 </div>
 <div class="w-full md:w-1/2 rounded-xl overflow-hidden h-48 md:h-64">
-<img class="w-full h-full object-cover" data-alt="A variety of fresh, colorful organic pet snacks and high-quality food bowls arranged neatly on a wooden surface. Warm morning sunlight streams across the scene, highlighting the textures of healthy ingredients and the clean, premium aesthetic of the PetMama kitchen area." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD4XDxk6wDLJMMUQ3VDC13Fcp0_I_YsoXcdUTXe5Kxm1kpsIV5iAbQ56zlSJ1OmJo5nc-y8xbgEh8tnC_muJVEubD5a61PUi4S2PbLLG8LIULjsdhXtO3RgbUdVYGkAQWVPwUsL85_PPJy7VDFH8zSx9ARVaT68BhAUa77vn3e048d_bSmW3xsK7B84RX14WykekLCX-QBJuk5l9wkqmJvOejeel2d5h4inymfWVc23seF6oJADnmSTOg"/>
+<img class="w-full h-full object-cover" alt="Fresh organic pet snacks arranged on a wooden surface" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD4XDxk6wDLJMMUQ3VDC13Fcp0_I_YsoXcdUTXe5Kxm1kpsIV5iAbQ56zlSJ1OmJo5nc-y8xbgEh8tnC_muJVEubD5a61PUi4S2PbLLG8LIULjsdhXtO3RgbUdVYGkAQWVPwUsL85_PPJy7VDFH8zSx9ARVaT68BhAUa77vn3e048d_bSmW3xsK7B84RX14WykekLCX-QBJuk5l9wkqmJvOejeel2d5h4inymfWVc23seF6oJADnmSTOg"/>
 </div>
 </div>
 </div>
 </div>
 </div>
 </section>
+
 <!-- Stats Section -->
 <section class="py-20 bg-surface">
 <div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
@@ -273,6 +137,7 @@
 </div>
 </div>
 </section>
+
 <!-- CTA Section -->
 <section class="px-margin-mobile md:px-margin-desktop pb-20">
 <div class="max-w-container-max mx-auto bg-primary-container rounded-[2rem] p-8 md:p-20 text-center relative overflow-hidden">
@@ -285,80 +150,4 @@
                 </button>
 </div>
 </section>
-</main>
-<!-- Footer -->
-<footer class="bg-surface-container dark:bg-surface-container-highest w-full border-t border-outline/10">
-<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter px-margin-desktop py-20 max-w-container-max mx-auto">
-<div>
-<div class="font-display-lg text-display-lg text-primary mb-6">PetMama</div>
-<p class="text-on-surface-variant max-w-xs mb-6">Defining the new standard of pet luxury and care. Your family is our family.</p>
-<div class="flex gap-4">
-<a class="w-10 h-10 rounded-full border border-primary flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-all" href="#">
-<span class="material-symbols-outlined text-sm">share</span>
-</a>
-<a class="w-10 h-10 rounded-full border border-primary flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-all" href="#">
-<span class="material-symbols-outlined text-sm">public</span>
-</a>
-</div>
-</div>
-<div class="grid grid-cols-2 gap-8 md:col-span-2">
-<div>
-<h4 class="font-title-lg text-title-lg text-primary mb-6">Quick Links</h4>
-<ul class="space-y-4">
-<li><a class="font-body-md text-body-md text-primary font-bold hover:text-primary underline transition-colors" href="#">Home</a></li>
-<li><a class="font-body-md text-body-md text-on-surface-variant hover:text-primary underline transition-colors" href="#">About Us</a></li>
-<li><a class="font-body-md text-body-md text-on-surface-variant hover:text-primary underline transition-colors" href="#">Contact</a></li>
-<li><a class="font-body-md text-body-md text-on-surface-variant hover:text-primary underline transition-colors" href="#">Blog</a></li>
-<li><a class="font-body-md text-body-md text-on-surface-variant hover:text-primary underline transition-colors" href="#">Privacy Policy</a></li>
-</ul>
-</div>
-<div>
-<h4 class="font-title-lg text-title-lg text-primary mb-6">Contact Info</h4>
-<ul class="space-y-4 text-on-surface-variant">
-<li class="flex items-start gap-3">
-<span class="material-symbols-outlined text-primary">location_on</span>
-<span>123 Whiskers Way, Paw Valley, CA 90210</span>
-</li>
-<li class="flex items-start gap-3">
-<span class="material-symbols-outlined text-primary">call</span>
-<span>(555) 123-4567</span>
-</li>
-<li class="flex items-start gap-3">
-<span class="material-symbols-outlined text-primary">mail</span>
-<span>hello@petmama.com</span>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="border-t border-outline/10 py-8 text-center text-on-surface-variant/60 font-body-md">
-            © 2024 PetMama Pet Hostel. All rights reserved.
-        </div>
-</footer>
-<script>
-        // Simple Micro-interactions
-        document.querySelectorAll('button').forEach(button => {
-            button.addEventListener('mousedown', () => {
-                button.classList.add('scale-95');
-            });
-            button.addEventListener('mouseup', () => {
-                button.classList.remove('scale-95');
-            });
-            button.addEventListener('mouseleave', () => {
-                button.classList.remove('scale-95');
-            });
-        });
-
-        // Sticky Nav logic
-        const nav = document.querySelector('nav');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                nav.classList.add('py-2');
-                nav.classList.remove('py-4');
-            } else {
-                nav.classList.add('py-4');
-                nav.classList.remove('py-2');
-            }
-        });
-    </script>
-</body></html>
+{% endblock %}
