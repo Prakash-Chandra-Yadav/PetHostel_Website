@@ -44,7 +44,7 @@
 </div>
 <h3 class="font-title-lg text-title-lg mb-2">Phone</h3>
 <p class="text-on-surface-variant mb-4">Monday - Friday, 8am to 6pm</p>
-<a class="text-primary font-bold text-lg hover:underline" href="tel:+15551234567">+1 (555) 123-4567</a>
+<a class="text-primary font-bold text-lg hover:underline" href="tel:+15551234567">{ contact_info.phone_number }</a>
 </div>
 <div class="bg-surface-container-low p-8 rounded-xl shadow-[0_10px_30px_rgba(232,124,75,0.04)] hover:-translate-y-1 transition-all duration-300 border border-transparent hover:border-primary/10">
 <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary mb-6">
@@ -52,14 +52,14 @@
 </div>
 <h3 class="font-title-lg text-title-lg mb-2">Email</h3>
 <p class="text-on-surface-variant mb-4">We'll respond within 24 hours</p>
-<a class="text-primary font-bold text-lg hover:underline" href="mailto:hello@petmama.com">hello@petmama.com</a>
+<a class="text-primary font-bold text-lg hover:underline" href="{{ contact_info.email }}">{{ contact_info.email }}</a>
 </div>
 <div class="bg-surface-container-low p-8 rounded-xl shadow-[0_10px_30px_rgba(232,124,75,0.04)] hover:-translate-y-1 transition-all duration-300 border border-transparent hover:border-primary/10">
 <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary mb-6">
 <span class="material-symbols-outlined">location_on</span>
 </div>
 <h3 class="font-title-lg text-title-lg mb-2">Visit Us</h3>
-<p class="text-on-surface-variant">123 Puppy Lane, Whiskers Valley<br/>San Francisco, CA 94103</p>
+<p class="text-on-surface-variant">{{ contact_info.location }}</p>
 </div>
 </div>
 <!-- Contact Form (Center Column) -->
