@@ -12,9 +12,14 @@ class Contact(models.Model):
 
 
 class CustomerContact(models.Model):
+    class PetType(models.TextChoices):
+        DOG = "dog", "Dog"
+        CAT = "cat", "Cat"
+        OTHER = "other", "Other"
+
     name = models.TextField(max_length=30)
     contact_email = models.EmailField()
-    pet_type = models.Choices("Dog", "cat")
+    pet_type = models.CharField(max_length=10, choices=PetType.choices)
     message = models.TextField(max_length=200)
 
     def __str__(self):
