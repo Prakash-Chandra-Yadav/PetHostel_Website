@@ -1,0 +1,296 @@
+{% extends "base.html" %}
+
+{% block title %}Book a Stay | PetMama Pet Hostel{% endblock %}
+
+{% block extra_head %}
+<style>
+    .booking-step-active {
+        @apply bg-primary text-on-primary;
+    }
+    .booking-step-inactive {
+        @apply bg-surface-container text-on-surface-variant;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="pb-20 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
+<!-- Hero Section / Context -->
+<div class="text-center mb-16">
+<h1 class="font-display-lg text-display-lg-mobile md:text-display-lg text-primary mb-4">Book Your Pet's Retreat</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto">
+                Tell us about your pet and your stay dates. We provide a warm, home-like environment with 24/7 professional care.
+            </p>
+</div>
+
+{% if messages %}
+{% for message in messages %}
+<div class="max-w-3xl mx-auto bg-green-100 text-green-800 px-6 py-4 rounded-xl mb-8 flex items-center gap-2">
+<span class="material-symbols-outlined">check_circle</span>
+{{ message }}
+</div>
+{% endfor %}
+{% endif %}
+
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+<!-- Left Side: Booking Form -->
+<div class="lg:col-span-8">
+<div class="bg-surface-container-lowest rounded-xl p-8 soft-shadow border border-surface-container">
+<form class="space-y-8" id="bookingForm" method="post" action="{% url 'booking' %}">
+{% csrf_token %}
+
+<!-- Stay Dates -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
+<div class="flex flex-col gap-2">
+<label class="font-label-md text-on-surface-variant ml-1" for="check_in_date">Check-in Date</label>
+<div class="relative">
+<input class="w-full p-4 bg-primary/5 border-2 border-transparent focus:border-primary focus:ring-0 rounded-xl transition-all outline-none" id="check_in_date" name="check_in_date" required type="date" value="{{ form.check_in_date.value|default_if_none:'' }}"/>
+<span class="material-symbols-outlined absolute right-4 top-4 text-primary pointer-events-none">calendar_today</span>
+</div>
+{% if form.check_in_date.errors %}
+<p class="text-red-500 text-sm px-1">{{ form.check_in_date.errors.0 }}</p>
+{% endif %}
+</div>
+<div class="flex flex-col gap-2">
+<label class="font-label-md text-on-surface-variant ml-1" for="check_out_date">Check-out Date</label>
+<div class="relative">
+<input class="w-full p-4 bg-primary/5 border-2 border-transparent focus:border-primary focus:ring-0 rounded-xl transition-all outline-none" id="check_out_date" name="check_out_date" required type="date" value="{{ form.check_out_date.value|default_if_none:'' }}"/>
+<span class="material-symbols-outlined absolute right-4 top-4 text-primary pointer-events-none">event</span>
+</div>
+{% if form.check_out_date.errors %}
+<p class="text-red-500 text-sm px-1">{{ form.check_out_date.errors.0 }}</p>
+{% endif %}
+</div>
+</div>
+
+<!-- Pet & Parent Details -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
+<div class="flex flex-col gap-2">
+<label class="font-label-md text-on-surface-variant ml-1" for="pet_name">Pet's Name</label>
+<input class="w-full p-4 bg-primary/5 border-2 border-transparent focus:border-primary focus:ring-0 rounded-xl transition-all outline-none" id="pet_name" name="pet_name" placeholder="Bella" required type="text" value="{{ form.pet_name.value|default_if_none:'' }}"/>
+{% if form.pet_name.errors %}
+<p class="text-red-500 text-sm px-1">{{ form.pet_name.errors.0 }}</p>
+{% endif %}
+</div>
+<div class="flex flex-col gap-2">
+<label class="font-label-md text-on-surface-variant ml-1" for="pet_age">Pet's Age (years)</label>
+<input class="w-full p-4 bg-primary/5 border-2 border-transparent focus:border-primary focus:ring-0 rounded-xl transition-all outline-none" id="pet_age" min="0" name="pet_age" placeholder="3" required type="number" value="{{ form.pet_age.value|default_if_none:'' }}"/>
+{% if form.pet_age.errors %}
+<p class="text-red-500 text-sm px-1">{{ form.pet_age.errors.0 }}</p>
+{% endif %}
+</div>
+</div>
+
+<div class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
+<div class="flex flex-col gap-2">
+<label class="font-label-md text-on-surface-variant ml-1" for="parent_name">Your Name</label>
+<input class="w-full p-4 bg-primary/5 border-2 border-transparent focus:border-primary focus:ring-0 rounded-xl transition-all outline-none" id="parent_name" name="parent_name" placeholder="Jane Doe" required type="text" value="{{ form.parent_name.value|default_if_none:'' }}"/>
+{% if form.parent_name.errors %}
+<p class="text-red-500 text-sm px-1">{{ form.parent_name.errors.0 }}</p>
+{% endif %}
+</div>
+<div class="flex flex-col gap-2">
+<label class="font-label-md text-on-surface-variant ml-1" for="contact_number">Contact Number</label>
+<input class="w-full p-4 bg-primary/5 border-2 border-transparent focus:border-primary focus:ring-0 rounded-xl transition-all outline-none" id="contact_number" name="contact_number" placeholder="+1 (555) 123-4567" required type="tel" value="{{ form.contact_number.value|default_if_none:'' }}"/>
+{% if form.contact_number.errors %}
+<p class="text-red-500 text-sm px-1">{{ form.contact_number.errors.0 }}</p>
+{% endif %}
+</div>
+</div>
+
+<div class="flex flex-col gap-2">
+<label class="font-label-md text-on-surface-variant ml-1" for="contact_email">Email Address</label>
+<input class="w-full p-4 bg-primary/5 border-2 border-transparent focus:border-primary focus:ring-0 rounded-xl transition-all outline-none" id="contact_email" name="contact_email" placeholder="jane@example.com" required type="email" value="{{ form.contact_email.value|default_if_none:'' }}"/>
+{% if form.contact_email.errors %}
+<p class="text-red-500 text-sm px-1">{{ form.contact_email.errors.0 }}</p>
+{% endif %}
+</div>
+
+<!-- Pet Type Selection -->
+<div>
+<label class="font-label-md text-on-surface-variant ml-1 mb-4 block">Select Pet Type</label>
+<div class="grid grid-cols-3 gap-4">
+<label class="cursor-pointer">
+<input class="hidden peer" name="pet_type" required type="radio" value="dog" {% if form.pet_type.value == "dog" or not form.pet_type.value %}checked{% endif %}/>
+<div class="flex flex-col items-center gap-2 p-6 rounded-xl border-2 border-surface-container bg-surface peer-checked:border-primary peer-checked:bg-primary-fixed/30 transition-all hover:bg-surface-container-low">
+<span class="material-symbols-outlined text-4xl text-primary">pets</span>
+<span class="font-label-md">Dog</span>
+</div>
+</label>
+<label class="cursor-pointer">
+<input class="hidden peer" name="pet_type" type="radio" value="cat" {% if form.pet_type.value == "cat" %}checked{% endif %}/>
+<div class="flex flex-col items-center gap-2 p-6 rounded-xl border-2 border-surface-container bg-surface peer-checked:border-primary peer-checked:bg-primary-fixed/30 transition-all hover:bg-surface-container-low">
+<span class="material-symbols-outlined text-4xl text-primary">pets</span>
+<span class="font-label-md">Cat</span>
+</div>
+</label>
+<label class="cursor-pointer">
+<input class="hidden peer" name="pet_type" type="radio" value="other" {% if form.pet_type.value == "other" %}checked{% endif %}/>
+<div class="flex flex-col items-center gap-2 p-6 rounded-xl border-2 border-surface-container bg-surface peer-checked:border-primary peer-checked:bg-primary-fixed/30 transition-all hover:bg-surface-container-low">
+<span class="material-symbols-outlined text-4xl text-primary">rebase_edit</span>
+<span class="font-label-md">Other</span>
+</div>
+</label>
+</div>
+{% if form.pet_type.errors %}
+<p class="text-red-500 text-sm px-1 mt-2">{{ form.pet_type.errors.0 }}</p>
+{% endif %}
+</div>
+
+<!-- Add-ons -->
+<div>
+<label class="font-label-md text-on-surface-variant ml-1 mb-4 block">Stay Add-ons (Optional)</label>
+<div class="space-y-3">
+<div class="flex items-center gap-4 p-4 rounded-xl bg-surface border border-surface-container hover:border-primary/30 transition-colors">
+<input class="addon-checkbox w-5 h-5 rounded text-primary focus:ring-primary border-outline-variant" data-price="25" name="addon_grooming" type="checkbox"/>
+<div class="flex-1">
+<div class="font-title-lg text-on-surface">Daily Professional Grooming</div>
+<div class="text-on-surface-variant text-sm">Full bath, brushing, and nail trimming.</div>
+</div>
+<div class="font-bold text-primary">+$25/day</div>
+</div>
+<div class="flex items-center gap-4 p-4 rounded-xl bg-surface border border-surface-container hover:border-primary/30 transition-colors">
+<input class="addon-checkbox w-5 h-5 rounded text-primary focus:ring-primary border-outline-variant" data-price="15" name="addon_meals" type="checkbox"/>
+<div class="flex-1">
+<div class="font-title-lg text-on-surface">Premium Organic Meals</div>
+<div class="text-on-surface-variant text-sm">Gourmet pet-safe ingredients prepared fresh.</div>
+</div>
+<div class="font-bold text-primary">+$15/day</div>
+</div>
+<div class="flex items-center gap-4 p-4 rounded-xl bg-surface border border-surface-container hover:border-primary/30 transition-colors">
+<input class="addon-checkbox w-5 h-5 rounded text-primary focus:ring-primary border-outline-variant" data-price="10" name="addon_playtime" type="checkbox"/>
+<div class="flex-1">
+<div class="font-title-lg text-on-surface">One-on-One Playtime</div>
+<div class="text-on-surface-variant text-sm">30 extra minutes of dedicated trainer play.</div>
+</div>
+<div class="font-bold text-primary">+$10/day</div>
+</div>
+</div>
+</div>
+
+<button class="w-full bg-primary text-on-primary py-5 rounded-full font-headline-md transition-all hover:bg-primary/90 hover:shadow-lg active:scale-[0.98]" type="submit">
+                            Book Now
+                        </button>
+</form>
+</div>
+</div>
+
+<!-- Right Side: Sticky Price Summary -->
+<div class="lg:col-span-4 space-y-gutter">
+<div class="bg-surface-container-high rounded-xl p-8 sticky top-32">
+<h3 class="font-headline-md text-primary mb-6">Booking Summary</h3>
+<div class="space-y-4 mb-8">
+<div class="flex justify-between items-center pb-4 border-b border-outline-variant/30">
+<span class="text-on-surface-variant">Stay Rate (per night)</span>
+<span class="font-bold">$45.00</span>
+</div>
+<div class="flex justify-between items-center pb-4 border-b border-outline-variant/30">
+<span class="text-on-surface-variant">Duration</span>
+<span class="font-bold" id="summary-nights">-- nights</span>
+</div>
+<div class="flex justify-between items-center pb-4 border-b border-outline-variant/30">
+<span class="text-on-surface-variant">Add-ons (per night)</span>
+<span class="font-bold" id="summary-addons">$0.00</span>
+</div>
+<div class="flex justify-between items-center pt-2">
+<span class="font-title-lg text-on-surface">Estimated Total</span>
+<span class="font-display-lg text-primary text-3xl" id="summary-total">$0.00</span>
+</div>
+</div>
+<p class="text-on-surface-variant text-sm mb-6">This is an estimate only — you won't be charged now. Payment is arranged after we confirm your pet's stay.</p>
+<div class="bg-surface p-4 rounded-lg flex gap-3 items-start mb-6">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+<div class="text-sm">
+<div class="font-bold text-on-surface">Safe Stay Guarantee</div>
+<p class="text-on-surface-variant">Your pet is fully insured and monitored 24/7 during their stay with us.</p>
+</div>
+</div>
+<div class="space-y-4">
+<div class="flex items-center gap-2 text-on-surface-variant text-sm">
+<span class="material-symbols-outlined text-secondary">check_circle</span>
+<span>Free cancellation up to 48 hours</span>
+</div>
+<div class="flex items-center gap-2 text-on-surface-variant text-sm">
+<span class="material-symbols-outlined text-secondary">check_circle</span>
+<span>Real-time photo updates</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Trust Markers -->
+<div class="max-w-container-max mx-auto px-margin-desktop mb-20 mt-12">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<div class="bg-surface-container rounded-xl p-8 flex flex-col items-center text-center hover:-translate-y-2 transition-transform">
+<div class="w-16 h-16 rounded-full bg-primary-container/20 flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-primary text-3xl">medical_services</span>
+</div>
+<h4 class="font-title-lg text-primary mb-2">On-call Vet</h4>
+<p class="text-on-surface-variant">Access to certified veterinary care 24/7 for total peace of mind.</p>
+</div>
+<div class="bg-surface-container rounded-xl p-8 flex flex-col items-center text-center hover:-translate-y-2 transition-transform">
+<div class="w-16 h-16 rounded-full bg-secondary-container/20 flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-secondary text-3xl">videocam</span>
+</div>
+<h4 class="font-title-lg text-secondary mb-2">Pet Cams</h4>
+<p class="text-on-surface-variant">Live stream your pet's activities anytime through our secure app.</p>
+</div>
+<div class="bg-surface-container rounded-xl p-8 flex flex-col items-center text-center hover:-translate-y-2 transition-transform">
+<div class="w-16 h-16 rounded-full bg-tertiary-container/20 flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-tertiary text-3xl">home_health</span>
+</div>
+<h4 class="font-title-lg text-tertiary mb-2">Home Comfort</h4>
+<p class="text-on-surface-variant">Climate-controlled rooms with orthopedic bedding and soothing music.</p>
+</div>
+</div>
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+    // Live price calculator — display only, does not block real form submission
+    const NIGHTLY_RATE = 45;
+
+    const checkInInput = document.getElementById('check_in_date');
+    const checkOutInput = document.getElementById('check_out_date');
+    const addonCheckboxes = document.querySelectorAll('.addon-checkbox');
+    const summaryNights = document.getElementById('summary-nights');
+    const summaryAddons = document.getElementById('summary-addons');
+    const summaryTotal = document.getElementById('summary-total');
+
+    function calculateNights() {
+        if (!checkInInput.value || !checkOutInput.value) return 0;
+        const checkIn = new Date(checkInInput.value);
+        const checkOut = new Date(checkOutInput.value);
+        const diffTime = checkOut - checkIn;
+        const nights = Math.round(diffTime / (1000 * 60 * 60 * 24));
+        return nights > 0 ? nights : 0;
+    }
+
+    function calculateAddonsPerNight() {
+        let total = 0;
+        addonCheckboxes.forEach(cb => {
+            if (cb.checked) total += parseFloat(cb.dataset.price);
+        });
+        return total;
+    }
+
+    function updateSummary() {
+        const nights = calculateNights();
+        const addonsPerNight = calculateAddonsPerNight();
+        const total = nights * (NIGHTLY_RATE + addonsPerNight);
+
+        summaryNights.textContent = nights > 0 ? `${nights} night${nights > 1 ? 's' : ''}` : '-- nights';
+        summaryAddons.textContent = `$${addonsPerNight.toFixed(2)}`;
+        summaryTotal.textContent = `$${total.toFixed(2)}`;
+    }
+
+    checkInInput.addEventListener('change', updateSummary);
+    checkOutInput.addEventListener('change', updateSummary);
+    addonCheckboxes.forEach(cb => cb.addEventListener('change', updateSummary));
+
+    updateSummary();
+</script>
+{% endblock %}
