@@ -40,3 +40,6 @@ class Reservation(models.Model):
     contact_number = models.TextField(max_length=14)
     booking_email = models.EmailField()
     pet_type = models.CharField(max_length=10, choices=PetType.choices)
+
+    def _str__(self):
+        return self.parent_name
