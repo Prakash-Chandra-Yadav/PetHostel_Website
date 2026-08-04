@@ -11,10 +11,6 @@ class HomeView(TemplateView):
     template_name = "home.html"
 
 
-class ContactView(TemplateView):
-    template_name = "contact.html"
-
-
 class ContactCreateView(CreateView):
     model = CustomerContact
     template_name = "contact.html"
@@ -25,3 +21,6 @@ class ContactCreateView(CreateView):
         response = super().form_valid(form)
         messages.success(self.request, "Thanks! we will be in touch soon")
         return response
+    
+class ReserveCreateView(CreateView):
+    
